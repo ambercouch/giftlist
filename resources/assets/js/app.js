@@ -15,6 +15,39 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+Vue.http.interceptors.push((request, next ) => {
+    next((response) => {
+    if( 'Content-Type' in response.headers
+        && response.headers['Content-Type'] == 'application/json' ){
+        if( typeof response.data != 'object' ){
+            response.data = JSON.parse( response.data );
+        }
+    }
+
+    if( 'content-type' in response.headers
+        && response.headers['content-type'] == 'application/json' ){
+        if( typeof response.data != 'object' ){
+            response.data = JSON.parse( response.data );
+        }
+    }
+});
+});
+
 const app = new Vue({
     el: '#app'
 });
