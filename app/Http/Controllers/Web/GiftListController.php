@@ -23,13 +23,13 @@ class GiftListController extends Controller
      */
     public function index()
     {
-        //
-        $limit = Input::get('limit', 10);
-        $giftlists = GiftList::where('user_id', 1)->paginate($limit);
+//        //
+//        $limit = Input::get('limit', 10);
+//        $giftlists = GiftList::where('user_id', 1)->paginate($limit);
+//
+//        $data['giftlists'] = $giftlists;
 
-        $data['giftlists'] = $giftlists;
-
-        return view('giftlists', $data);
+        return view('giftlists');
     }
 
     public function authUser()
