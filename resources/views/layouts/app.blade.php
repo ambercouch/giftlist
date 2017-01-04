@@ -44,6 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                        <li><a href="{{url('/gift-lists')}}">Gift Lists</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -70,6 +71,7 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    <li><a href="{{url('/settings')}}">Settings</a></li>
                                 </ul>
                             </li>
                         @endif
