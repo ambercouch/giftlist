@@ -22,3 +22,26 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\GiftList::class, function (Faker\Generator $faker) {
+
+    $gift_list_names = [
+        'Some List',
+        'My Wish List',
+        'Stuff',
+        '21st Birthday',
+        'Richard and Louise 2013',
+        'Christmas List 2017',
+        'I Want',
+        'Marks and Spencer\'s',
+        'Stuff for Lou',
+        'Dad\'s List',
+        'Mum\'s Stuff'
+    ];
+
+    return [
+        'user_id' => $faker->numberBetween(1,10),
+        'gift_list_name' => $faker->randomElement($gift_list_names),
+    ];
+});
