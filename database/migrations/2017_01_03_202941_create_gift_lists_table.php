@@ -15,6 +15,9 @@ class CreateGiftListsTable extends Migration
     {
         Schema::create('gift_lists', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('gift_list_name');
             $table->timestamps();
         });
     }

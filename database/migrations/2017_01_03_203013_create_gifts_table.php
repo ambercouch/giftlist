@@ -15,6 +15,12 @@ class CreateGiftsTable extends Migration
     {
         Schema::create('gifts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('gift_list_id')->unsigned()->index();
+            $table->foreign('gift_list_id')->references('id')->on('gift_lists')->onDelete('cascade');
+            $table->string('gift_name');
+            $table->string('gift_url');
+            $table->integer('user_id')->unsigned()->index()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
     }
