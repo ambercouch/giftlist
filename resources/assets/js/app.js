@@ -15,6 +15,9 @@ require('./bootstrap');
 console.log('app js');
 Vue.component('example', require('./components/Example.vue'));
 
+console.log('app js');
+Vue.component('giftlistlist', require('./components/GiftListsLists.vue'));
+
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')
@@ -49,20 +52,6 @@ Vue.http.interceptors.push((request, next ) => {
 });
 
 const app = new Vue({
-    el: '#app',
-    data: {
-        message: 'Hello Vue!'
-    },
-    methods: {
-        reverseMessage: function () {
-            this.message = this.message.split('').reverse().join('')
-        }
-    },
-    mounted: function () {
-        this.$http.get('api/giftlist')
-            .then(response => {
-                console.log(response.data);
-             });
-        }
+    el: '#app'
 });
 
