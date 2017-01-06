@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\GiftList;
 use Illuminate\Http\Request;
 
-class GiftListController extends Controller
+use Illuminate\Support\Facades\Input;
+
+class GiftListController extends ApiController
 {
+    protected $authUser;
+
+    function __construct()
+    {
+        $this->authUser = $this->authUser();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,16 @@ class GiftListController extends Controller
      */
     public function index()
     {
-        //
+        //return 'Auth User' . $this->authUser->id;
+
+        $limit = Input::get('limit', 3);
+        $giftlists = GiftList::where('user_id', $this->authUser->id)->paginate($limit);
+
+
+
+        return $this->respondWithPagination($giftlists, [
+            'data' => $giftlists->toArray()
+        ]);
     }
 
     /**
