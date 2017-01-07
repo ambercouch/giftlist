@@ -44,7 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{url('/gift-lists')}}">Gift Lists</a></li>
+                        <li><a href="{{url('/giftlists')}}">Gift Lists</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
