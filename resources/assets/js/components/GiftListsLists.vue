@@ -5,7 +5,7 @@
             <p>123 Click a list to view or edit your gifts or create a new list of gifts to share with your friends and family</p>
 
             <ul>
-              <li v-for="list in giftlists"><a :href="'api/giftlists/'+list.id">{{ list.gift_list_name}}</a></li>
+              <li v-for="list in giftlists"><a :href="'/giftlist/'+list.id">{{ list.gift_list_name}}</a></li>
             </ul>
         </div>
     </div>
