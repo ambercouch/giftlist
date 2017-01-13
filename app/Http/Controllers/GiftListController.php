@@ -64,7 +64,16 @@ class GiftListController extends ApiController
      */
     public function show($id)
     {
-        return 'some list';
+        $giftlist = GiftList::where('user_id', $this->authUser()->id)->find($id);
+
+        if (!$giftlist)
+        {
+            return $this->respondNotFound('Giftlist not found');
+        }
+
+        return $this->respond([
+            'data' => $giftlist
+        ]);
     }
 
     /**
