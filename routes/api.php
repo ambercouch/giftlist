@@ -17,7 +17,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+
+//Route::resource('/giftlists/{id}', 'GiftlistController@show');
+
 Route::group(['prefix' => '/', 'middleware' => 'auth:api' ], function()
 {
-    Route::resource('/giftlists/', 'GiftlistController');
+    Route::resource('giftlist', 'GiftlistController');
+    Route::resource('giftlists', 'GiftlistController');
+    //Route::resource('/giftlists/{id}', 'GiftlistController');
 });
