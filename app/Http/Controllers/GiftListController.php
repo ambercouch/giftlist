@@ -64,7 +64,7 @@ class GiftListController extends ApiController
      */
     public function show($id)
     {
-        //
+        return 'some list';
     }
 
     /**
