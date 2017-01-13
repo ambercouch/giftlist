@@ -26,6 +26,11 @@ class GiftListController extends Controller
         return view('giftlists');
     }
 
+    public function show($id)
+    {
+        return view('giftlist')->with('id', $id);
+    }
+
 
 
     public function authUser()
