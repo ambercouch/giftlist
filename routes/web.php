@@ -24,6 +24,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth' ], function()
     Route::get('/home', 'Web\HomeController@index');
     Route::get('/giftlists', 'Web\GiftlistController@index');
     Route::get('/giftlist/{id}', 'Web\GiftlistController@show');
+    Route::get('/gift/{id}', 'Web\GiftlistController@gift');
     Route::get('/settings', 'Web\SettingsController@index');
 });
 
