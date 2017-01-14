@@ -1,13 +1,12 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading"><h2>Gift - </h2></div>
+        <div class="panel-heading"><h2>Gift</h2></div>
         <div class="panel-body">
-            <p>Edit your gift</p>
-            <ul>
-              <li></li>
-            </ul>
+            <h3>{{gift.gift_name}}</h3>
+            <div>{{gift.gift_url}}</div>
         </div>
     </div>
+
 
 </template>
 
@@ -24,7 +23,9 @@
         mounted() {
             this.$http.get('/api/gift/'+this.giftid)
             						.then(response => {
+
                                 this.gift = response.data.data;
+                                console.log(response);
             						});
         }
     }

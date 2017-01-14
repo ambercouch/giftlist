@@ -24,5 +24,6 @@ Route::group(['prefix' => '/', 'middleware' => 'auth:api' ], function()
 {
     Route::resource('giftlist', 'GiftlistController');
     Route::resource('giftlists', 'GiftlistController');
+    Route::resource('gift', 'GiftController');
     //Route::resource('/giftlists/{id}', 'GiftlistController');
 });

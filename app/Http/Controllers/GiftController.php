@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Gift;
 
-class GiftController extends Controller
+class GiftController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -45,7 +46,17 @@ class GiftController extends Controller
      */
     public function show($id)
     {
-        //
+        $gift = Gift::find($id);
+
+
+        if (!$gift)
+        {
+            return $this->respondNotFound('Gift not found');
+        }
+
+        return $this->respond([
+            'data' => $gift
+        ]);
     }
 
     /**
