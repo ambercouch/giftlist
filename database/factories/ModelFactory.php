@@ -45,3 +45,16 @@ $factory->define(App\GiftList::class, function (Faker\Generator $faker) {
         'gift_list_name' => $faker->randomElement($gift_list_names),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Gift::class, function (Faker\Generator $faker) {
+
+
+
+    return [
+        'gift_list_id' => 4,
+        'gift_name' => $faker->word,
+        'gift_url' => $faker->url,
+        'user_id' => 1,
+    ];
+});
