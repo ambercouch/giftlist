@@ -2,9 +2,9 @@
     <div class="panel panel-default">
         <div class="panel-heading"><h2>Gift List - {{giftlist.gift_list_name}}</h2></div>
         <div class="panel-body">
-            <p>123 Click a list to view or edit your gifts or create a new list of gifts to share with your friends and family</p>
+            <p>Click a Gift to edit or create a new gift to add to the list </p>
             <ul>
-              <li v-for="list in giftlists"><a :href="'/giftlist/'+list.id">{{ list.gift_list_name}}</a></li>
+              <li v-for="gift in giftlist.gifts"><a :href="'/gift/'+gift.id">{{ gift.gift_name}}</a></li>
             </ul>
         </div>
     </div>
