@@ -46,7 +46,7 @@ class GiftController extends ApiController
      */
     public function show($id)
     {
-        $gift = Gift::find($id);
+        $gift = Gift::with('giftlist')->find($id);
 
 
         if (!$gift)

@@ -1,22 +1,34 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading"><h2>Gift</h2></div>
+        <div class="panel-heading">
+            <h2>{{gift.gift_name}}</h2>
+            <small>Back to the <a :href="'/giftlist/'+gift.giftlist.id">{{gift.giftlist.gift_list_name}}</a> gift list.</small>
+        </div>
         <div class="panel-body">
-            <h3>{{gift.gift_name}}</h3>
-            <div>{{gift.gift_url}}</div>
+            <div class="gift__details">
+                <strong>Purchase URL:</strong> <a :href="gift.gift_url">{{gift.gift_url}}</a> <button @click="liked" type="button" class="btn btn-primary btn-sm" >{{ active ? saveLabel : editLabel }}</button>
+            </div>
         </div>
     </div>
-
-
 </template>
 
 <script>
     export default {
         props:['giftid'],
-								data: function () {
+        data: function () {
 								return {
-								    gift: [],
-                    giftId: this.giftid
+								    gift: {
+								        giftlist : {}
+                    },
+                    giftId: this.giftid,
+                    editLabel: 'Edit',
+                    saveLabel: 'Save',
+                    active: false,
+            }
+        },
+        methods: {
+            buttonToggle: function () {
+                this.active = ! this.active;
             }
         },
 
