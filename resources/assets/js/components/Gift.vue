@@ -5,8 +5,11 @@
             <small>Back to the <a :href="'/giftlist/'+gift.giftlist.id">{{gift.giftlist.gift_list_name}}</a> gift list.</small>
         </div>
         <div class="panel-body">
-            <div class="gift__details">
-                <strong>Purchase URL:</strong> <a :href="gift.gift_url">{{gift.gift_url}}</a> <button @click="liked" type="button" class="btn btn-primary btn-sm" >{{ active ? saveLabel : editLabel }}</button>
+            <div class="gift__details" style="">
+                <strong  style="display: block;" >Purchase&nbsp;URL:</strong>
+                <a style="display: block;padding: 6px 0" v-if="!active" :href="gift.gift_url">{{gift.gift_url}}</a>
+                <input @keyup.enter="buttonToggle" style="display: block;" v-if="active" v-model="gift.gift_url" class="form-control" type="url" :value="gift.gift_url"/>
+                <button style="display: block;"   @click="buttonToggle" type="button" class="btn btn-primary btn-sm" >{{ active ? saveLabel : editLabel }}</button>
             </div>
         </div>
     </div>
@@ -28,7 +31,27 @@
         },
         methods: {
             buttonToggle: function () {
-                this.active = ! this.active;
+                //this.active = ! this.active;
+                if (this.active){
+                    console.log('save')
+                    this.saveGift();
+                    this.active = ! this.active;
+                }else {
+                    console.log('edit')
+                    this.active = ! this.active;
+                }
+            },
+            saveGift: function () {
+                var data = {
+                    '_method' : 'PATCH',
+                    'gift_name': this.gift.gift_name,
+                    'gift_url': this.gift.gift_url
+                }
+                this.$http.post('/api/gift/'+this.giftid, data)
+                    .then(response => {
+                        console.log('save the gift');
+                console.log(response);
+            });
             }
         },
 
