@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Gift;
+use Illuminate\Support\Facades\Input;
+use Validator;
 
 class GiftController extends ApiController
 {
@@ -36,6 +38,7 @@ class GiftController extends ApiController
     public function store(Request $request)
     {
         //
+        return 'some gift';
     }
 
     /**
@@ -79,7 +82,28 @@ class GiftController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+        $validator = Validator::make($request->all(), [
+            'gift_name' => 'required|max:255',
+            'gift_url' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->messages()->toArray();
+            return $this->respondUnprocessable('Unable to Create booking sheet', $errors);
+        }
+
+        $request->request->remove('_method');
+
+        $gift = Gift::find($id)->update($request->all());
+
+        return $this->respondCreated(['data' => $gift], 'Gift updated.');
+
+        //$gift = Booking_sheet::create($this->booking_sheetTransformer->transformBack(Input::all()));
+
+        //return $request->all();
     }
 
     /**
