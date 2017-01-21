@@ -93,4 +93,16 @@ class ApiController extends Controller
         return $this->setStatusCode(422)->respondWithError($message, $errors);
     }
 
+    /**
+     * @param $message
+     * @return mixed
+     */
+    public function reponseDestroyed($data, $message)
+    {
+        $data = array_merge($data, [
+            'message' => $message
+        ]);
+        return $this->setStatusCode(202)->respond($data);
+    }
+
 }
