@@ -18,6 +18,7 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('giftlistlist', require('./components/GiftListsLists.vue'));
 Vue.component('giftlist', require('./components/GiftList.vue'));
 Vue.component('gift', require('./components/Gift.vue'));
+Vue.component('flashmessage', require('./components/FlashMessage.vue'));
 
 Vue.component(
     'passport-clients',

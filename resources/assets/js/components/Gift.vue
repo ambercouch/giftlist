@@ -45,6 +45,7 @@
                     .then( response => {
                    console.log('deleted and go');
                 //var router = new VueRouter() ;
+                this.$cookie.set('flashmessage', 'Gift Deleted', 1);
                 location.href = '/giftlist/'+this.gift.giftlist.id;
                 });
             },
