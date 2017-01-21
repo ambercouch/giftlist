@@ -8,8 +8,8 @@
             <div class="gift__details" style="">
                 <strong  style="display: block;" >Purchase&nbsp;URL:</strong>
                 <a style="display: block;padding: 6px 0;margin-bottom: 6px" v-if="!active" :href="gift.gift_url">{{gift.gift_url}}</a>
-                <input @keyup.enter="buttonToggle" style="display: block;margin-bottom: 6px" v-if="active" v-model="gift.gift_url" class="form-control" type="url" :value="gift.gift_url"/>
-                <button style=""   @click="editToggle" type="button" class="btn btn-primary btn-sm" >{{ active ? saveLabel : editLabel }}</button>  <button class="btn btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <input @keyup.enter="editToggle" style="display: block;margin-bottom: 6px" v-if="active" v-model="gift.gift_url" class="form-control" type="url" :value="gift.gift_url"/>
+                <button style=""   @click="editToggle" type="button" class="btn btn-primary btn-sm" >{{ active ? saveLabel : editLabel }}</button>  <button @click="delGift" class="btn btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>
@@ -33,13 +33,20 @@
             editToggle: function () {
                 //this.active = ! this.active;
                 if (this.active){
-                    console.log('save')
                     this.saveGift();
                     this.active = ! this.active;
                 }else {
-                    console.log('edit')
                     this.active = ! this.active;
                 }
+            },
+            delGift: function () {
+                console.log('del gift');
+                this.$http.delete('/api/gift/'+this.giftid)
+                    .then( response => {
+                   console.log('deleted and go');
+                //var router = new VueRouter() ;
+                location.href = '/giftlist/'+this.gift.giftlist.id;
+                });
             },
             saveGift: function () {
                 var data = {
