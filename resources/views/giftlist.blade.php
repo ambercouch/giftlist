@@ -7,6 +7,8 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <giftlist listid="{{$id}}"></giftlist>
+
+            <addgift></addgift>
         </div>
     </div>
 </div>
