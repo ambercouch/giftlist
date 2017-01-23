@@ -19,8 +19,14 @@ require('bootstrap-sass');
 window.Vue = require('vue');
 require('vue-resource');
 
+// var VueAxios = require('axios');
+// Vue.use(VueAxios);
+
 var VueCookie = require('vue-cookie');
 Vue.use(VueCookie);
+
+window.axios = require('axios');
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
