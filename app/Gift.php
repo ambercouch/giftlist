@@ -9,7 +9,7 @@ class Gift extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['gift_name', 'gift_url'];
+    protected $fillable = ['gift_name', 'gift_url', 'gift_list_id'];
     protected $dates = ['deleted_at'];
 
     public function giftlist()
