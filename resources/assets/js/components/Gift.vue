@@ -55,17 +55,20 @@
                     'gift_name': this.gift.gift_name,
                     'gift_url': this.gift.gift_url
                 }
-                this.$http.post('/api/gift/'+this.giftid, data)
-                    .then(response => {
+                axios.post('/api/gift/'+this.giftid, data)
+                    .then(function (response) {
                         console.log('save the gift');
-                console.log(response);
-            });
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
         },
 
         mounted() {
-            this.$http.get('/api/gift/'+this.giftid)
-            						.then(response => {
+            axios.get('/api/gift/'+this.giftid)
+            						.then((response) => {
 
                                 this.gift = response.data.data;
                                 console.log(response);

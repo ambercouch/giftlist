@@ -1,8 +1,8 @@
 <template>
     <div class="panel panel-default">
         <div class="panel-body">
-            <input @keyup.enter="editToggle" style="display: block;margin-bottom: 6px" v-if="active" v-model="gift.gift_url" class="form-control" type="url" :value="gift.gift_url"/>
-
+            <input placeholder="Gift Name"  style="display: block;margin-bottom: 6px" v-if="active" v-model="gift.gift_name" class="form-control" type="text" :value="gift.gift_name"/>
+            <input placeholder="Gift Url"  style="display: block;margin-bottom: 6px" v-if="active" v-model="gift.gift_url" class="form-control" type="url" :value="gift.gift_url"/>
             <a @click="addToggle" >{{ active ? saveLabel : addLabel }}</a>
         </div>
     </div>
@@ -10,10 +10,12 @@
 
 <script>
     export default {
+        props:['listid'],
         data: function () {
 								return {
 								    gift: {
-								        giftlist : {}
+								        gift_name: '',
+                        gift_url: ''
                     },
                     addLabel: 'Add a New Gift',
                     saveLabel: 'Save the Gift',
@@ -24,44 +26,43 @@
             addToggle: function () {
                 //this.active = ! this.active;
                 if (this.active){
-//                    this.saveGift();
+                    this.saveGift();
                     this.active = ! this.active;
                 }else {
                     this.active = ! this.active;
                 }
             },
             delGift: function () {
-//                console.log('del gift');
-//                this.$http.delete('/api/gift/'+this.giftid)
-//                    .then( response => {
-//                   console.log('deleted and go');
-//                //var router = new VueRouter() ;
-//                this.$cookie.set('flashmessage', 'Gift Deleted', 1);
-//                location.href = '/giftlist/'+this.gift.giftlist.id;
-//                });
+
             },
             saveGift: function () {
-//                var data = {
-//                    '_method' : 'PATCH',
-//                    'gift_name': this.gift.gift_name,
-//                    'gift_url': this.gift.gift_url
-//                }
-//                this.$http.post('/api/gift/'+this.giftid, data)
-//                    .then(response => {
-//                        console.log('save the gift');
-//                console.log(response);
-//            });
+
+                var data = {
+                    'gift_name': this.gift.gift_name,
+                    'gift_url': this.gift.gift_url,
+                    'gift_list_id': this.listid
+                }
+
+                axios.post('/api/gift',  data)
+                    .then(function (response) {
+//                        this.$cookie.set('flashmessage', 'Gift Added', 1);
+//                        location.href = '/giftlist/'+this.gift.giftlist.id;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
             }
         },
 
         mounted() {
             console.log('add a gift')
-            this.$http.get('/api/gift/'+this.giftid)
-            						.then(response => {
-
-                                this.gift = response.data.data;
-                                console.log(response);
-            						});
+//            this.$http.get('/api/gift/'+this.giftid)
+//            						.then(response => {
+//
+//                                this.gift = response.data.data;
+//                                console.log(response);
+//            						});
         }
     }
 </script>

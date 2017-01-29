@@ -17,6 +17,7 @@ class GiftController extends ApiController
     public function index()
     {
         //
+        return 'gift index';
     }
 
     /**
@@ -37,8 +38,24 @@ class GiftController extends ApiController
      */
     public function store(Request $request)
     {
-        //
-        return 'some gift';
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'gift_name' => 'required|max:255',
+            'gift_url' => 'required',
+            'gift_list_id' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->messages()->toArray();
+            return $this->respondUnprocessable('Unable to Create Gift', $errors);
+        }
+
+        $gift = Gift::create(Input::all());
+
+        $gift = Gift::where('id', $gift->id)->get();
+
+        return $this->respondCreated(['data' => $gift], 'New gift created.');
     }
 
     /**
@@ -83,7 +100,6 @@ class GiftController extends ApiController
     public function update(Request $request, $id)
     {
 
-
         $validator = Validator::make($request->all(), [
             'gift_name' => 'required|max:255',
             'gift_url' => 'required',
@@ -123,4 +139,6 @@ class GiftController extends ApiController
         return $this->reponseDestroyed(['data' => $gift[0] ], 'Gift Deleted');
 
     }
+
+
 }

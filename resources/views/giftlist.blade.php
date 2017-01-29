@@ -6,9 +6,9 @@
     <flashmessage></flashmessage>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <giftlist listid="{{$id}}"></giftlist>
+            <giftlist listid="{{$id}}" ></giftlist>
 
-            <addgift></addgift>
+            <addgift listid="{{$id}}" ></addgift>
         </div>
     </div>
 </div>
