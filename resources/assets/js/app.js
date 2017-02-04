@@ -54,7 +54,47 @@ Vue.http.interceptors.push((request, next ) => {
 });
 });
 
+
+
+var store = {
+    debug: true,
+    state:{
+        giftlists: [],
+        giftlist: [],
+        gift : []
+    },
+    // updateState: function () {
+    //     //this.state[prop] = value;
+    //     console.log('update that state');
+    // },
+    // setGiftlistsAction: function (newValue) {
+    //     this.debug && console.log('setMessageAction triggered with', newValue)
+    //     this.state.giftlists = newValue
+    // },
+    // clearMessageAction: function () {
+    //     // this.debug && console.log('clearMessageAction triggered')
+    //     // this.state.message = ''
+    // }
+}
+
+
+
+
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        shared: store,
+    },
+    methods: {
+        // updateState: function () {
+        //     console.log('appjs sometester');
+        // },
+        updateGiftLists: function (giftLists) {
+            this.shared.state.giftlists = giftLists;
+
+        }
+    }
 });
+
 
