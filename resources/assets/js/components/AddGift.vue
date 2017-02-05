@@ -14,7 +14,7 @@
         data: function () {
 								return {
 								    gift: {
-								        gift_name: '',
+    								        gift_name: '',
                         gift_url: ''
                     },
                     addLabel: 'Add a New Gift',
@@ -42,11 +42,12 @@
                     'gift_url': this.gift.gift_url,
                     'gift_list_id': this.listid
                 }
+                var self = this;
 
                 axios.post('/api/gift',  data)
                     .then(function (response) {
-//                        this.$cookie.set('flashmessage', 'Gift Added', 1);
-//                        location.href = '/giftlist/'+this.gift.giftlist.id;
+                        self.$cookie.set('flashmessage', 'Gift Added', 1);
+                        location.href = '/giftlist/'+self.listid;
                     })
                     .catch(function (error) {
                         console.log(error);
