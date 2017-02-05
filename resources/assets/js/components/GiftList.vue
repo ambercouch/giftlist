@@ -15,18 +15,33 @@
 
 <script>
     export default {
-        props:['listid'],
+        props:[
+            'listid',
+            'giftlist'
+        ],
 								data: function () {
 								return {
-								    giftlist: [],
                     listId: this.listid
+            }
+        },
+        methods:  {
+            updateGiftList: function (giftList) {
+                this.$emit('updategiftlist' , giftList);
+                console.log('updateGiftList');
+                console.log(giftList);
             }
         },
 
         mounted() {
+            console.log('updateGiftList');
+            console.log('updateGiftList');
             this.$http.get('/api/giftlists/'+this.listid)
             						.then(response => {
-                                this.giftlist = response.data.data;
+                                //this.giftlist = response.data.data;
+
+                                this.updateGiftList(response.data.data);
+
+            console.log('updateGiftList');
             						});
         }
     }

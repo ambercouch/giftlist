@@ -93,6 +93,10 @@ const app = new Vue({
         updateGiftLists: function (giftLists) {
             this.shared.state.giftlists = giftLists;
 
+        },
+        updateGiftList: function (giftList) {
+            this.shared.state.giftlist = giftList;
+
         }
     }
 });
