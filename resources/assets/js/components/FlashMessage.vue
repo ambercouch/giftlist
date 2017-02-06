@@ -1,14 +1,18 @@
 <template>
-    <div v-if="flashMessage" class="alert alert-warning" role="alert">
-        {{flashMessage}}
+    <div v-if="flashmessage" class="alert alert-warning" role="alert">
+        {{flashmessage}}
     </div>
 </template>
 
 <script>
+
     export default {
+        props: [
+            'flashmessage'
+        ],
         data: function () {
 								return {
-								    flashMessage: ''
+								 //   flashMessage: ''
             }
         },
         methods: {
@@ -24,10 +28,12 @@
         },
 
         mounted: function() {
-            if(this.$cookie.get('flashmessage')){
-                this.flashMessage = this.$cookie.get('flashmessage');
-                this.$cookie.delete('flashmessage');
-            }
+            console.log('this.flashmessage');
+            console.log(this.flashmessage);
+//            if(this.$cookie.get('flashmessage')){
+//                this.flashMessage = this.$cookie.get('flashmessage');
+//                this.$cookie.delete('flashmessage');
+//            }
 
 
         }

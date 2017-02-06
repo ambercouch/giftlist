@@ -27,8 +27,6 @@
         methods:  {
             updateGiftList: function (giftList) {
                 this.$emit('updategiftlist' , giftList);
-                console.log('updateGiftList');
-                console.log(giftList);
             }
         },
 
@@ -37,11 +35,9 @@
             console.log('updateGiftList');
             this.$http.get('/api/giftlists/'+this.listid)
             						.then(response => {
-                                //this.giftlist = response.data.data;
 
                                 this.updateGiftList(response.data.data);
 
-            console.log('updateGiftList');
             						});
         }
     }

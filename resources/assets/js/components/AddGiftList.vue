@@ -40,24 +40,21 @@
 
                 axios.post('/api/giftlist',  data)
                     .then(function (response) {
-                        self.$cookie.set('flashmessage', 'Gift List Added', 1);
-                        location.href = '/giftlists/';
+                        self.updateFlashMessage('Gift List Added');
                     })
                     .catch(function (error) {
                         console.log(error);
                     });
 
+            },
+            updateFlashMessage: function (message) {
+                    this.$emit('updateflashmessage' , message);
             }
+
         },
 
         mounted() {
-            console.log('add a gift list')
-//            this.$http.get('/api/gift/'+this.giftid)
-//            						.then(response => {
-//
-//                                this.gift = response.data.data;
-//                                console.log(response);
-//            						});
+            console.log('add a gift list');
         }
     }
 </script>

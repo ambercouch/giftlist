@@ -4,13 +4,13 @@
     @verbatim
 
 <div class="container">
-    <flashmessage></flashmessage>
+    <flashmessage v-bind:flashmessage="shared.state.flashMessage" ></flashmessage>
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <GiftListList v-bind:giftlists="shared.state.giftlists" v-on:updategiftlists="updateGiftLists"></GiftListList>
 
-            <addgiftlist></addgiftlist>
+            <addgiftlist v-on:updateflashmessage="updateFlashMessage" ></addgiftlist>
         </div>
     </div>
 </div>

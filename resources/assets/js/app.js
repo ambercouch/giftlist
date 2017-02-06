@@ -62,7 +62,8 @@ var store = {
     state:{
         giftlists: [],
         giftlist: [],
-        gift : []
+        gift : [],
+        flashMessage : ''
     },
     // updateState: function () {
     //     //this.state[prop] = value;
@@ -88,17 +89,15 @@ const app = new Vue({
         shared: store,
     },
     methods: {
-        // updateState: function () {
-        //     console.log('appjs sometester');
-        // },
         updateGiftLists: function (giftLists) {
             this.shared.state.giftlists = giftLists;
-
         },
         updateGiftList: function (giftList) {
             this.shared.state.giftlist = giftList;
-
-        }
+        },
+        updateFlashMessage: function (message) {
+            this.shared.state.flashMessage = message;
+        },
     }
 });
 

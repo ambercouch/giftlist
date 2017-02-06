@@ -58,12 +58,6 @@
 
         mounted() {
             console.log('add a gift')
-//            this.$http.get('/api/gift/'+this.giftid)
-//            						.then(response => {
-//
-//                                this.gift = response.data.data;
-//                                console.log(response);
-//            						});
         }
     }
 </script>
