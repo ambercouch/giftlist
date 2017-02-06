@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\GiftList;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Input;
+use Validator;
 
 class GiftListController extends ApiController
 {
@@ -25,7 +25,7 @@ class GiftListController extends ApiController
     {
         //return 'Auth User' . $this->authUser->id;
 
-        $limit = Input::get('limit', 3);
+        $limit = Input::get();
         $giftlists = GiftList::where('user_id', $this->authUser->id)->paginate($limit);
 
 
@@ -53,7 +53,25 @@ class GiftListController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $userId = $this->authUser()->id;
+        $request->request->add(['user_id' => $userId]);
+//        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'gift_list_name' => 'required|max:255',
+            'user_id' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->messages()->toArray();
+            return $this->respondUnprocessable('Unable to Create Gift List', $errors);
+        }
+
+        $giftList = GiftList::create($request->all());
+
+        $giftList = GiftList::where('id', $giftList->id)->get();
+
+        return $this->respondCreated(['data' => $giftList], 'New gift List created.');
     }
 
     /**
