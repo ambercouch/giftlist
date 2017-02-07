@@ -24,9 +24,9 @@ class GiftListController extends ApiController
     public function index()
     {
         //return 'Auth User' . $this->authUser->id;
-
+//        return 'test';
         $limit = Input::get();
-        $giftlists = GiftList::where('user_id', $this->authUser->id)->paginate($limit);
+        $giftlists = GiftList::where('user_id', $this->authUser->id)->orderBy('created_at', 'desc')->paginate($limit);
 
 
 
