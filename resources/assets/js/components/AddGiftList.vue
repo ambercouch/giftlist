@@ -41,6 +41,9 @@
                 axios.post('/api/giftlist',  data)
                     .then(function (response) {
                         self.updateFlashMessage('Gift List Added');
+                        self.refreshGiftList();
+
+                        console.log('response received');
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -49,6 +52,11 @@
             },
             updateFlashMessage: function (message) {
                     this.$emit('updateflashmessage' , message);
+                console.log('updateFlashMessage');
+            },
+            refreshGiftList: function () {
+                this.$emit('refreshgiftlist');
+                console.log('refreshGiftList');
             }
 
         },

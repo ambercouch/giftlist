@@ -91,12 +91,21 @@ const app = new Vue({
     methods: {
         updateGiftLists: function (giftLists) {
             this.shared.state.giftlists = giftLists;
+            console.log('update gls');
+        },
+        refreshGiftList: function (giftList) {
+            var self = this;
+            this.$http.get('api/giftlists')
+                .then(response => {
+                    self.shared.state.giftlists = response.data.data.data;
+                });
         },
         updateGiftList: function (giftList) {
             this.shared.state.giftlist = giftList;
         },
         updateFlashMessage: function (message) {
             this.shared.state.flashMessage = message;
+            console.log('update fm');
         },
     }
 });

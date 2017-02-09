@@ -10,7 +10,7 @@
         <div class="col-md-8 col-md-offset-2">
             <GiftListList v-bind:giftlists="shared.state.giftlists" v-on:updategiftlists="updateGiftLists"></GiftListList>
 
-            <addgiftlist v-on:updateflashmessage="updateFlashMessage" ></addgiftlist>
+            <addgiftlist  v-on:refreshgiftlist="refreshGiftList" v-on:updateflashmessage="updateFlashMessage"></addgiftlist>
         </div>
     </div>
 </div>
