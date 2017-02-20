@@ -19,6 +19,7 @@ class CreateGiftListsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('gift_list_name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
