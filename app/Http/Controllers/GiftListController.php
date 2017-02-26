@@ -126,5 +126,11 @@ class GiftListController extends ApiController
     public function destroy($id)
     {
         //
+        GiftList::destroy($id);
+        $gift = GiftList::withTrashed()
+                    ->where('id', $id)
+                    ->get();
+
+        return $this->reponseDestroyed(['data' => $gift[0] ], 'Gift List Deleted');
     }
 }
