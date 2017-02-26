@@ -114,7 +114,22 @@ class GiftListController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'gift_list_name' => 'required|max:255'
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->messages()->toArray();
+            return $this->respondUnprocessable('Unable to Update the gift list', $errors);
+        }
+
+        $request->request->remove('_method');
+
+        $giftlist = Giftlist::find($id)->update($request->all());
+
+        return $this->respondCreated(['data' => $giftlist], 'Gift List updated.');
+
     }
 
     /**

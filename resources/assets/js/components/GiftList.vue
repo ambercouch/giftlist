@@ -1,6 +1,10 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading"><h2>Gift List - {{giftlist.gift_list_name}}</h2></div>
+      <div class="panel-heading">
+        <h2>Gift List - <span v-if="!editTitle" @click="toggleEditTitle">{{giftlist.gift_list_name}}</span>
+          <input @keyup.enter="saveGiftList" @blur="saveGiftList" type="text" v-if="editTitle" v-model="giftlist.gift_list_name" />
+        </h2>
+      </div>
         <div class="panel-body">
             <p>Click a Gift to edit or create a new gift to add to the list </p>
             <ul class="gift-list__list">
@@ -27,12 +31,32 @@
 								data: function () {
 								return {
                     listId: this.listid,
-                    showRemove: false
+                    showRemove: false,
+                    editTitle: false,
             }
         },
         methods:  {
             updateGiftList: function (giftList) {
                 this.$emit('updategiftlist' , giftList);
+            },
+            toggleEditTitle: function(){
+                this.editTitle = !this.editTitle;
+            },
+            saveGiftList: function () {
+                this.toggleEditTitle();
+                var data = {
+                    '_method' : 'PATCH',
+                    'gift_list_name': this.giftlist.gift_list_name,
+
+                }
+                axios.post('/api/giftlist/'+this.listId, data)
+                    .then(function (response) {
+                        console.log('save the gift_list');
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             },
             delGift: function (gift) {
                 var self = this;

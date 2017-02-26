@@ -108,7 +108,7 @@ class GiftController extends ApiController
         if ($validator->fails())
         {
             $errors = $validator->messages()->toArray();
-            return $this->respondUnprocessable('Unable to Create booking sheet', $errors);
+            return $this->respondUnprocessable('Unable to update the gift', $errors);
         }
 
         $request->request->remove('_method');
