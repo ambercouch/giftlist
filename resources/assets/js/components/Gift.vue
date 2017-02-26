@@ -10,7 +10,7 @@
         <div class="panel-body">
             <div class="gift__details" style="">
                 <strong  style="display: block;" >Purchase&nbsp;URL:</strong>
-                <a style="display: block;padding: 6px 0;margin-bottom: 6px" v-if="!active" :href="gift.gift_url">{{gift.gift_url}}</a>
+                <a style="display: block;padding: 6px 0;margin-bottom: 6px" title='Visit this web page' target="_blank" v-if="!active" :href="gift.gift_url">{{gift.gift_url}}</a>
                 <input @keyup.enter="editToggle" style="display: block;margin-bottom: 6px" v-if="active" v-model="gift.gift_url" class="form-control" type="url" :value="gift.gift_url"/>
                 <button    @click="editToggle" type="button" class="btn btn-primary btn-sm" >{{ active ? saveLabel : editLabel }}</button>
                 <button @click="delGift" class="btn btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
@@ -56,7 +56,7 @@
                 });
             },
             saveGift: function () {
-                
+
                 this.editTitle = false;
 
                 var data = {

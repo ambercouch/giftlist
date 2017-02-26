@@ -8,11 +8,15 @@
         <div class="panel-body">
             <p>Click a Gift to edit or create a new gift to add to the list </p>
             <ul class="gift-list__list">
-              <li class="gift-list__item" v-for="gift in giftlist.gifts" @mouseover="showRemove = gift.id" @mouseout="showRemove = fales" >
-                <a title="Edit this gift."  :href="'/gift/'+gift.id">{{ gift.gift_name}}</a>
+              <li class="gift-list__item" v-for="gift in giftlist.gifts" @mouseover="giftHoverOn(gift)"  @mouseout="giftHoverOff" >
+                <a title="Edit this gift." :href="'/gift/'+gift.id">{{ gift.gift_name}}</a>
+                <a v-if="showOutBound == gift.id" :title="'Vist this web page - '+gift.url"  target="_blank" style="padding: 0" :href="gift.gift_url" class="btn btn-link">
+                  <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>
+                </a>
                 <button @click="delGift(gift)" style="padding: 0" class="btn btn-link" v-if="showRemove == gift.id">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
+
               </li>
             </ul>
         </div>
@@ -32,6 +36,7 @@
 								return {
                     listId: this.listid,
                     showRemove: false,
+                    showOutBound: false,
                     editTitle: false,
             }
         },
@@ -41,6 +46,14 @@
             },
             toggleEditTitle: function(){
                 this.editTitle = !this.editTitle;
+            },
+            giftHoverOn: function (gift) {
+                this.showRemove = gift.id;
+                this.showOutBound = gift.id
+            },
+            giftHoverOff: function () {
+                this.showRemove = false;
+                this.showOutBound = false;
             },
             saveGiftList: function () {
                 this.toggleEditTitle();
